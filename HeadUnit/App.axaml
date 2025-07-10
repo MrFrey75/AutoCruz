@@ -1,12 +1,246 @@
+<!-- Add this to App.axaml in the Application.DataTemplates section -->
+
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="HeadUnit.App"
              xmlns:local="using:HeadUnit"
+             xmlns:vm="using:HeadUnit.ViewModels"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
         <local:ViewLocator/>
+        
+        <!-- Home View Template -->
+        <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+            <Grid>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30">
+                    <TextBlock Text="{Binding WelcomeMessage}" 
+                              Foreground="White" 
+                              FontSize="48" 
+                              FontWeight="Light"
+                              HorizontalAlignment="Center" 
+                              TextAlignment="Center"/>
+                    <TextBlock Text="{Binding SubMessage}" 
+                              Foreground="#AAA" 
+                              FontSize="24" 
+                              HorizontalAlignment="Center" 
+                              TextAlignment="Center"/>
+                    
+                    <!-- Quick Access Cards -->
+                    <Grid Margin="0,50,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Music Card -->
+                        <Border Grid.Column="0" Background="#1a1a1a" CornerRadius="10" Padding="20" MinHeight="120">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="🎵" FontSize="32" HorizontalAlignment="Center" Foreground="Lime"/>
+                                <TextBlock Text="Music" FontSize="18" HorizontalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="Last played" FontSize="12" HorizontalAlignment="Center" Foreground="#888"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Video Card -->
+                        <Border Grid.Column="2" Background="#1a1a1a" CornerRadius="10" Padding="20" MinHeight="120">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="🎬" FontSize="32" HorizontalAlignment="Center" Foreground="Lime"/>
+                                <TextBlock Text="Videos" FontSize="18" HorizontalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="Recent files" FontSize="12" HorizontalAlignment="Center" Foreground="#888"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Tools Card -->
+                        <Border Grid.Column="4" Background="#1a1a1a" CornerRadius="10" Padding="20" MinHeight="120">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="🔧" FontSize="32" HorizontalAlignment="Center" Foreground="Lime"/>
+                                <TextBlock Text="Tools" FontSize="18" HorizontalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="System tools" FontSize="12" HorizontalAlignment="Center" Foreground="#888"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        
+        <!-- Audio View Template -->
+        <DataTemplate DataType="{x:Type vm:AudioViewModel}">
+            <Grid Margin="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Audio Header -->
+                <StackPanel Grid.Row="0" Spacing="10" Margin="0,0,0,30">
+                    <TextBlock Text="{Binding Title}" 
+                              Foreground="White" 
+                              FontSize="36" 
+                              FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding Status}" 
+                              Foreground="#AAA" 
+                              FontSize="18"/>
+                </StackPanel>
+                
+                <!-- Audio Content Area -->
+                <Border Grid.Row="1" Background="#1a1a1a" CornerRadius="15" Padding="30">
+                    <StackPanel Spacing="20" VerticalAlignment="Center">
+                        <!-- Album Art Placeholder -->
+                        <Border Width="200" Height="200" Background="#333" CornerRadius="10" HorizontalAlignment="Center">
+                            <TextBlock Text="🎵" FontSize="64" Foreground="#666" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        
+                        <!-- Track Info -->
+                        <StackPanel Spacing="5" HorizontalAlignment="Center">
+                            <TextBlock Text="No Track Selected" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+                            <TextBlock Text="Choose music to play" FontSize="16" Foreground="#AAA" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <!-- Playback Controls -->
+                        <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center" Margin="0,20,0,0">
+                            <Button Background="Transparent" BorderThickness="0" Padding="10">
+                                <TextBlock Text="⏮️" FontSize="24" Foreground="Lime"/>
+                            </Button>
+                            <Button Background="Transparent" BorderThickness="0" Padding="15">
+                                <TextBlock Text="▶️" FontSize="32" Foreground="Lime"/>
+                            </Button>
+                            <Button Background="Transparent" BorderThickness="0" Padding="10">
+                                <TextBlock Text="⏭️" FontSize="24" Foreground="Lime"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
+        
+        <!-- Video View Template -->
+        <DataTemplate DataType="{x:Type vm:VideoViewModel}">
+            <Grid Margin="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Video Header -->
+                <StackPanel Grid.Row="0" Spacing="10" Margin="0,0,0,30">
+                    <TextBlock Text="{Binding Title}" 
+                              Foreground="White" 
+                              FontSize="36" 
+                              FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding Status}" 
+                              Foreground="#AAA" 
+                              FontSize="18"/>
+                </StackPanel>
+                
+                <!-- Video Content Area -->
+                <Border Grid.Row="1" Background="#1a1a1a" CornerRadius="15" Padding="30">
+                    <StackPanel Spacing="20" VerticalAlignment="Center">
+                        <!-- Video Placeholder -->
+                        <Border Height="300" Background="#000" CornerRadius="10" HorizontalAlignment="Stretch">
+                            <StackPanel VerticalAlignment="Center" Spacing="10">
+                                <TextBlock Text="🎬" FontSize="64" Foreground="#666" HorizontalAlignment="Center"/>
+                                <TextBlock Text="No Video Selected" FontSize="24" Foreground="White" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Choose a video to watch" FontSize="16" Foreground="#AAA" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Video Controls -->
+                        <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center" Margin="0,20,0,0">
+                            <Button Background="Transparent" BorderThickness="0" Padding="10">
+                                <TextBlock Text="⏮️" FontSize="24" Foreground="Lime"/>
+                            </Button>
+                            <Button Background="Transparent" BorderThickness="0" Padding="15">
+                                <TextBlock Text="▶️" FontSize="32" Foreground="Lime"/>
+                            </Button>
+                            <Button Background="Transparent" BorderThickness="0" Padding="10">
+                                <TextBlock Text="⏭️" FontSize="24" Foreground="Lime"/>
+                            </Button>
+                            <Button Background="Transparent" BorderThickness="0" Padding="10">
+                                <TextBlock Text="⏹️" FontSize="24" Foreground="Lime"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
+        
+        <!-- Settings View Template -->
+        <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+            <Grid Margin="40">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Settings Header -->
+                <StackPanel Grid.Row="0" Spacing="10" Margin="0,0,0,30">
+                    <TextBlock Text="{Binding Title}" 
+                              Foreground="White" 
+                              FontSize="36" 
+                              FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding Version}" 
+                              Foreground="#AAA" 
+                              FontSize="18"/>
+                </StackPanel>
+                
+                <!-- Settings Content -->
+                <ScrollViewer Grid.Row="1">
+                    <StackPanel Spacing="20">
+                        <!-- Display Settings -->
+                        <Border Background="#1a1a1a" CornerRadius="10" Padding="20">
+                            <StackPanel Spacing="15">
+                                <TextBlock Text="Display" FontSize="20" Foreground="Lime" FontWeight="SemiBold"/>
+                                <StackPanel Spacing="10">
+                                    <TextBlock Text="Brightness" FontSize="16" Foreground="White"/>
+                                    <Slider Value="75" Minimum="0" Maximum="100" Foreground="Lime"/>
+                                </StackPanel>
+                                <StackPanel Spacing="10">
+                                    <TextBlock Text="Night Mode" FontSize="16" Foreground="White"/>
+                                    <ToggleButton Content="Auto" Foreground="Lime"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Audio Settings -->
+                        <Border Background="#1a1a1a" CornerRadius="10" Padding="20">
+                            <StackPanel Spacing="15">
+                                <TextBlock Text="Audio" FontSize="20" Foreground="Lime" FontWeight="SemiBold"/>
+                                <StackPanel Spacing="10">
+                                    <TextBlock Text="Volume" FontSize="16" Foreground="White"/>
+                                    <Slider Value="50" Minimum="0" Maximum="100" Foreground="Lime"/>
+                                </StackPanel>
+                                <StackPanel Spacing="10">
+                                    <TextBlock Text="Equalizer" FontSize="16" Foreground="White"/>
+                                    <ComboBox SelectedIndex="0" Foreground="White" Background="#333">
+                                        <ComboBoxItem>Default</ComboBoxItem>
+                                        <ComboBoxItem>Rock</ComboBoxItem>
+                                        <ComboBoxItem>Pop</ComboBoxItem>
+                                        <ComboBoxItem>Classical</ComboBoxItem>
+                                    </ComboBox>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- System Settings -->
+                        <Border Background="#1a1a1a" CornerRadius="10" Padding="20">
+                            <StackPanel Spacing="15">
+                                <TextBlock Text="System" FontSize="20" Foreground="Lime" FontWeight="SemiBold"/>
+                                <StackPanel Spacing="10">
+                                    <Button Content="Software Update" Background="#333" Foreground="White" Padding="10,5"/>
+                                    <Button Content="Factory Reset" Background="#800" Foreground="White" Padding="10,5"/>
+                                    <Button Content="About" Background="#333" Foreground="White" Padding="10,5"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </DataTemplate>
     </Application.DataTemplates>
   
     <Application.Styles>

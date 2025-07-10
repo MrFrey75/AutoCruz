@@ -5,12 +5,150 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AssemblyName>AutoCruz.Host</AssemblyName>
+        <Product>AutoCruz Head Unit System</Product>
+        <Company>AutoCruz</Company>
+        <Copyright>© 2025 AutoCruz. All rights reserved.</Copyright>
+        <Version>1.0.0</Version>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <Description>AutoCruz Car Entertainment System Host Application</Description>
+
+        <!-- Publishing Configuration -->
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>true</SelfContained>
+        <PublishTrimmed>false</PublishTrimmed> <!-- Disable for Avalonia compatibility -->
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">linux-arm64</RuntimeIdentifier>
+        <PublishReadyToRun>true</PublishReadyToRun>
+
+        <!-- Development Configuration -->
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+        <WarningsAsErrors />
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);CS1591</NoWarn> <!-- Missing XML comments -->
     </PropertyGroup>
 
+    <!-- Target Platform Configurations -->
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <DebugType>full</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DefineConstants>TRACE</DefineConstants>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+
+    <!-- Microsoft Extensions Packages for DI, Configuration, Hosting, Logging -->
     <ItemGroup>
-      <ProjectReference Include="..\Core\Core.csproj" />
-      <ProjectReference Include="..\Hardware\Hardware.csproj" />
-      <ProjectReference Include="..\HeadUnit\HeadUnit.csproj" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.0" />
     </ItemGroup>
+
+    <!-- File Logging (Optional - add if you want file logging) -->
+    <ItemGroup>
+        <PackageReference Include="Serilog" Version="3.1.1" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
+    </ItemGroup>
+
+    <!-- System Monitoring -->
+    <ItemGroup>
+        <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
+    </ItemGroup>
+
+    <!-- JSON Serialization -->
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="8.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <!-- Project References -->
+    <ItemGroup>
+        <ProjectReference Include="..\Core\Core.csproj" />
+        <ProjectReference Include="..\Hardware\Hardware.csproj" />
+        <ProjectReference Include="..\HeadUnit\HeadUnit.csproj" />
+    </ItemGroup>
+
+    <!-- Configuration Files -->
+    <ItemGroup>
+        <None Update="appsettings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="appsettings.Development.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="appsettings.Production.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="appsettings.Staging.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <!-- Runtime Configuration -->
+    <ItemGroup>
+        <None Update="runtimeconfig.template.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <!-- Create directory structure on build -->
+    <ItemGroup>
+        <Folder Include="config\" />
+        <Folder Include="data\" />
+    </ItemGroup>
+
+    <!-- Copy plugin assemblies to output -->
+    <ItemGroup>
+        <None Include="..\Plugins\**\*.dll" Condition="Exists('..\Plugins')">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <DestinationSubDirectory>plugins\</DestinationSubDirectory>
+        </None>
+    </ItemGroup>
+
+    <!-- Platform-specific configurations -->
+    <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">
+        <DefineConstants>$(DefineConstants);RASPBERRY_PI</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+        <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+        <DefineConstants>$(DefineConstants);LINUX_X64</DefineConstants>
+    </PropertyGroup>
+
+    <!-- Post-build tasks -->
+    <Target Name="CreateDirectories" AfterTargets="Build">
+        <MakeDir Directories="$(OutputPath)plugins" Condition="!Exists('$(OutputPath)plugins')" />
+        <MakeDir Directories="$(OutputPath)logs" Condition="!Exists('$(OutputPath)logs')" />
+        <MakeDir Directories="$(OutputPath)config" Condition="!Exists('$(OutputPath)config')" />
+        <MakeDir Directories="$(OutputPath)data" Condition="!Exists('$(OutputPath)data')" />
+    </Target>
+
+    <!-- Clean task to remove generated directories -->
+    <Target Name="CleanDirectories" AfterTargets="Clean">
+        <RemoveDir Directories="$(OutputPath)plugins" Condition="Exists('$(OutputPath)plugins')" />
+        <RemoveDir Directories="$(OutputPath)logs" Condition="Exists('$(OutputPath)logs')" />
+        <RemoveDir Directories="$(OutputPath)config" Condition="Exists('$(OutputPath)config')" />
+        <RemoveDir Directories="$(OutputPath)data" Condition="Exists('$(OutputPath)data')" />
+    </Target>
 
 </Project>

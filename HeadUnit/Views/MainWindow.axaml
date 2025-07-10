@@ -3,18 +3,164 @@
         xmlns:vm="using:HeadUnit.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
         x:Class="HeadUnit.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="HeadUnit">
+        Title="Auto Cruz Head Unit"
+        Background="Black"
+        MinWidth="640" MinHeight="360"
+        Width="1280" Height="720"
+        WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/> <!-- Top Status Bar -->
+            <RowDefinition Height="*"/>   <!-- Main Content -->
+            <RowDefinition Height="80"/>  <!-- Bottom Navigation -->
+        </Grid.RowDefinitions>
 
+        <!-- Top Status Bar -->
+        <Border Grid.Row="0" Background="Black" BorderBrush="#333" BorderThickness="0,0,0,1">
+            <Grid Margin="20,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left: Auto Cruz -->
+                <TextBlock Grid.Column="0" 
+                          Text="Auto Cruz" 
+                          Foreground="Red" 
+                          FontSize="28" 
+                          FontWeight="Bold"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Left"/>
+
+                <!-- Center: Status Message -->
+                <TextBlock Grid.Column="1" 
+                          Text="{Binding StatusMessage}" 
+                          Foreground="Red" 
+                          FontSize="20"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          TextAlignment="Center"/>
+
+                <!-- Right: Date and Time -->
+                <StackPanel Grid.Column="2" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding CurrentTime}" 
+                              Foreground="Red" 
+                              FontSize="24" 
+                              FontWeight="SemiBold"
+                              HorizontalAlignment="Right"/>
+                    <TextBlock Text="{Binding CurrentDate}" 
+                              Foreground="Red" 
+                              FontSize="16"
+                              HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Border Grid.Row="1" Background="Black">
+            <ContentPresenter Name="MainContentPresenter" 
+                            Content="{Binding CurrentView}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                <!-- Default Home View -->
+                <ContentPresenter.ContentTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="Welcome to Auto Cruz" 
+                                      Foreground="White" 
+                                      FontSize="48" 
+                                      FontWeight="Light"
+                                      HorizontalAlignment="Center" 
+                                      VerticalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ContentPresenter.ContentTemplate>
+            </ContentPresenter>
+        </Border>
+
+        <!-- Bottom Navigation Bar -->
+        <Border Grid.Row="2" Background="Black" BorderBrush="#333" BorderThickness="0,1,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/> <!-- Settings gear -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Home Button -->
+                <Button Grid.Column="0" 
+                        Name="HomeButton"
+                        Background="Transparent" 
+                        BorderThickness="0"
+                        Command="{Binding NavigateToHomeCommand}"
+                        Padding="10">
+                    <StackPanel Orientation="Vertical" Spacing="5">
+                        <TextBlock Text="🏠" FontSize="24" HorizontalAlignment="Center" Foreground="Lime"/>
+                        <TextBlock Text="Home" FontSize="14" HorizontalAlignment="Center" Foreground="Lime"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Audio Button -->
+                <Button Grid.Column="1" 
+                        Name="AudioButton"
+                        Background="Transparent" 
+                        BorderThickness="0"
+                        Command="{Binding NavigateToAudioCommand}"
+                        Padding="10">
+                    <StackPanel Orientation="Vertical" Spacing="5">
+                        <TextBlock Text="🎵" FontSize="24" HorizontalAlignment="Center" Foreground="Lime"/>
+                        <TextBlock Text="Audio" FontSize="14" HorizontalAlignment="Center" Foreground="Lime"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Video Button -->
+                <Button Grid.Column="2" 
+                        Name="VideoButton"
+                        Background="Transparent" 
+                        BorderThickness="0"
+                        Command="{Binding NavigateToVideoCommand}"
+                        Padding="10">
+                    <StackPanel Orientation="Vertical" Spacing="5">
+                        <TextBlock Text="🎬" FontSize="24" HorizontalAlignment="Center" Foreground="Lime"/>
+                        <TextBlock Text="Video" FontSize="14" HorizontalAlignment="Center" Foreground="Lime"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Plugin Placeholder -->
+                <Button Grid.Column="3" 
+                        Name="PluginButton"
+                        Background="Transparent" 
+                        BorderThickness="0"
+                        Padding="10">
+                    <StackPanel Orientation="Vertical" Spacing="5">
+                        <TextBlock Text="🔧" FontSize="24" HorizontalAlignment="Center" Foreground="Lime"/>
+                        <TextBlock Text="Tools" FontSize="14" HorizontalAlignment="Center" Foreground="Lime"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Settings Gear -->
+                <Button Grid.Column="4" 
+                        Name="SettingsButton"
+                        Background="Transparent" 
+                        BorderThickness="0"
+                        Command="{Binding NavigateToSettingsCommand}"
+                        Padding="10">
+                    <TextBlock Text="⚙️" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Lime"/>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>
