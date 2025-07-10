@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace AutoCruz.Ui.ViewModels;
+namespace HeadUnit.ViewModels;
 
 public class ViewModelBase : ReactiveObject
 {

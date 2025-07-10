@@ -8,9 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AutoCruz.Core\AutoCruz.Core.csproj" />
-      <ProjectReference Include="..\AutoCruz.Plugins\AutoCruz.Plugins.csproj" />
-      <ProjectReference Include="..\AutoCruz.Ui\AutoCruz.Ui.csproj" />
+      <ProjectReference Include="..\Core\Core.csproj" />
+      <ProjectReference Include="..\Hardware\Hardware.csproj" />
+      <ProjectReference Include="..\HeadUnit\HeadUnit.csproj" />
     </ItemGroup>
 
 </Project>

@@ -6,8 +6,4 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\AutoCruz.Core\AutoCruz.Core.csproj" />
-    </ItemGroup>
-
 </Project>

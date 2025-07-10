@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using AutoCruz.Ui.ViewModels;
+using HeadUnit.ViewModels;
 
-namespace AutoCruz.Ui;
+namespace HeadUnit;
 
 public class ViewLocator : IDataTemplate
 {

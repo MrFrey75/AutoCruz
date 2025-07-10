@@ -1,13 +1,12 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using AutoCruz.Plugins;
-using AutoCruz.Ui.ViewModels;
-using AutoCruz.Ui.Views;
+using HeadUnit.ViewModels;
+using HeadUnit.Views;
 
-namespace AutoCruz.Ui;
+namespace HeadUnit;
 
-public class App : Application
+public partial class App : Application
 {
     public override void Initialize()
     {
@@ -18,11 +17,9 @@ public class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var plugins = PluginLoader.LoadPlugins("plugins");
-
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(plugins)
+                DataContext = new MainWindowViewModel(),
             };
         }
 

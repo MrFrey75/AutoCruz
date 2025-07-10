@@ -2,7 +2,7 @@
 using Avalonia.ReactiveUI;
 using System;
 
-namespace AutoCruz.Ui;
+namespace HeadUnit;
 
 sealed class Program
 {
