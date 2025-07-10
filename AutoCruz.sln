@@ -1,52 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{960F3A49-894A-4961-9A28-44FC041878F5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{C92FBF9F-27AE-4B44-A1D7-1A50763416AF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeadUnit", "HeadUnit\HeadUnit.csproj", "{0C8FC6E1-8A43-4F50-9C14-59BA9491129C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{16DBBD2C-CB9E-4A62-9EE2-DF5179E083C7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hardware", "Hardware\Hardware.csproj", "{79864A1E-3EC2-4C9E-880A-85DAF3824DB6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioPlayerPlugin", "Plugins\AudioPlayerPlugin\AudioPlayerPlugin.csproj", "{1E5D0455-4325-4DFD-8EC1-67367DB68E63}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoPlayerPlugin", "Plugins\VideoPlayerPlugin\VideoPlayerPlugin.csproj", "{AB651FB2-F346-47A2-88FE-EAF373B3148A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C92FBF9F-27AE-4B44-A1D7-1A50763416AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C92FBF9F-27AE-4B44-A1D7-1A50763416AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C92FBF9F-27AE-4B44-A1D7-1A50763416AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C92FBF9F-27AE-4B44-A1D7-1A50763416AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C8FC6E1-8A43-4F50-9C14-59BA9491129C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C8FC6E1-8A43-4F50-9C14-59BA9491129C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C8FC6E1-8A43-4F50-9C14-59BA9491129C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C8FC6E1-8A43-4F50-9C14-59BA9491129C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16DBBD2C-CB9E-4A62-9EE2-DF5179E083C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16DBBD2C-CB9E-4A62-9EE2-DF5179E083C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16DBBD2C-CB9E-4A62-9EE2-DF5179E083C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16DBBD2C-CB9E-4A62-9EE2-DF5179E083C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79864A1E-3EC2-4C9E-880A-85DAF3824DB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79864A1E-3EC2-4C9E-880A-85DAF3824DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79864A1E-3EC2-4C9E-880A-85DAF3824DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79864A1E-3EC2-4C9E-880A-85DAF3824DB6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E5D0455-4325-4DFD-8EC1-67367DB68E63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E5D0455-4325-4DFD-8EC1-67367DB68E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E5D0455-4325-4DFD-8EC1-67367DB68E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E5D0455-4325-4DFD-8EC1-67367DB68E63}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB651FB2-F346-47A2-88FE-EAF373B3148A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB651FB2-F346-47A2-88FE-EAF373B3148A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB651FB2-F346-47A2-88FE-EAF373B3148A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB651FB2-F346-47A2-88FE-EAF373B3148A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1E5D0455-4325-4DFD-8EC1-67367DB68E63} = {960F3A49-894A-4961-9A28-44FC041878F5}
-		{AB651FB2-F346-47A2-88FE-EAF373B3148A} = {960F3A49-894A-4961-9A28-44FC041878F5}
 	EndGlobalSection
 EndGlobal
